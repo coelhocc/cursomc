@@ -3,10 +3,12 @@ package com.djaian.cursomc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.djaian.cursomc.domain.Categoria;
 import com.djaian.cursomc.repositories.CategoriaRepository;
+import com.djaian.cursomc.services.exceptions.DataIntegrityException;
 import com.djaian.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -35,4 +37,12 @@ public class CategoriaService {
 		return repo.save(obj);
 	}
 
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir uma Categorias que possui Produtos");
+		}
+	}
 }
