@@ -41,8 +41,17 @@ public class ItemPedido implements Serializable{
 		return id.getPedido();
 	}
 
+	//O framework não utiliza o construtor da classe, por isso a necessidade de definir os Sets de Pedido e Produto.
+	public void setPedido(Pedido pedido) {
+		this.id.setPedido(pedido);
+	}
+	
 	public Produto getProduto() {
 		return id.getProduto();
+	}
+
+	public void setProduto(Produto produto) {
+		this.id.setProduto(produto);
 	}
 
 	public ItemPedidoPK getId() {
