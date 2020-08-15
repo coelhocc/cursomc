@@ -17,11 +17,14 @@ import org.springframework.stereotype.Service;
 import com.djaian.cursomc.domain.Cidade;
 import com.djaian.cursomc.domain.Cliente;
 import com.djaian.cursomc.domain.Endereco;
+import com.djaian.cursomc.domain.enums.Perfil;
 import com.djaian.cursomc.domain.enums.TipoCliente;
 import com.djaian.cursomc.dto.ClienteDTO;
 import com.djaian.cursomc.dto.ClienteNewDTO;
 import com.djaian.cursomc.repositories.ClienteRepository;
 import com.djaian.cursomc.repositories.EnderecoRepository;
+import com.djaian.cursomc.security.UserSS;
+import com.djaian.cursomc.services.exceptions.AuthorizationException;
 import com.djaian.cursomc.services.exceptions.DataIntegrityException;
 import com.djaian.cursomc.services.exceptions.ObjectNotFoundException;
 
@@ -38,6 +41,11 @@ public class ClienteService {
 	private BCryptPasswordEncoder pe;
 	
 	public Cliente find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if(user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		
 		Optional<Cliente> obj = repo.findById(id);
 		
