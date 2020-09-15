@@ -92,33 +92,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 }
 
-/*
-	@Bean
-	CorsConfigurationSource configurationSource() {
-		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
-		configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
-		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
-		return source;
-	}
-/*
-	@Bean
-	public CorsFilter corsFilter() {
-		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	    final CorsConfiguration config = new CorsConfiguration().applyPermitDefaultValues();
-	    config.setAllowCredentials(true);
-	    // Don't do this in production, use a proper list of allowed origins
-	    // TODO trocar o endereço pelo do servidor de produção
-	    config.setAllowedOrigins(Collections.singletonList("http://localhost:8100"));
-	    config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept"));
-	    config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
-	    source.registerCorsConfiguration("/**", config);
-	    return new CorsFilter(source);
-	}
-	
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-*/
-
