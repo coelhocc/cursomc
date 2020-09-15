@@ -25,7 +25,6 @@ import com.djaian.cursomc.services.CategoriaService;
 /*
  * Controlador REST
  **/
-
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
